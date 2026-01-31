@@ -1,0 +1,58 @@
+repos:
+  - repo: local
+    hooks:
+      - id: cargo-fmt
+        name: Cargo Fmt
+        entry: cargo fmt --
+        language: system
+        types: [ rust ]
+
+      - id: cargo-check
+        name: Cargo Check
+        entry: cargo check --quiet
+        language: system
+        types: [ rust ]
+        pass_filenames: false
+
+      - id: cargo-clippy
+        name: Cargo Clippy
+        entry: cargo clippy --all-targets --all-features --quiet -- -D warnings -A deprecated
+        language: system
+        types: [ rust ]
+        pass_filenames: false
+
+      - id: cargo-test
+        name: Cargo Test
+        entry: cargo test --quiet
+        language: system
+        types: [ rust ]
+        pass_filenames: false
+
+      - id: cargo-audit
+        name: Cargo Audit
+        entry: cargo audit
+        language: system
+        pass_filenames: false
+        args: [
+          --quiet,
+          --ignore, RUSTSEC-2020-0082,
+        ]
+
+      - id: cargo-outdated
+        name: Cargo Outdated
+        entry: cargo outdated
+        language: system
+        pass_filenames: false
+        args: [
+          --quiet,
+          --exit-code, "1",
+          --root-deps-only,
+          --ignore, ordered-float,
+        ]
+
+      - id: cargo-udeps
+        name: Cargo Udeps
+        entry: cargo +nightly udeps
+        language: system
+        pass_filenames: false
+        args: [ "--all-targets" ]

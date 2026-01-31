@@ -1,0 +1,18 @@
+[package]
+name = "syncd"
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+description = "Linux daemon and CLI for safe rsync-based sync over SSH"
+
+[dependencies]
+anyhow = "1"
+clap = { version = "4", features = ["derive"] }
+notify = "8.2.0"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tempfile = "3"
+toml = "0.9"
+tokio = { version = "1", features = ["io-util", "macros", "net", "rt", "rt-multi-thread", "signal", "sync"] }
+
+[dev-dependencies]
